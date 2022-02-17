@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class Main {
+public class Ex_02_GetVillainsNames {
     public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
@@ -22,13 +22,16 @@ public class Main {
                 "ORDER BY villain_min DESC;");
 
 
-        String names = scanner.nextLine();
-        stmt.setString(1,names);
-        ResultSet rs = stmt.getResultSet();
+//        String names = scanner.nextLine();
+//        stmt.setString(1,names);
+        ResultSet rs = stmt.executeQuery();
 
 
         while (rs.next()){
-            System.out.printf("%s %d", rs.getString("name"), rs.getInt("count"));
+            String villainName = rs.getString("name");
+            Integer minionCount = rs.getInt("villain_min");
+            System.out.println(villainName + " " + minionCount);
+           // System.out.printf("%s %d", rs.getString("name"), rs.getInt("villain_min"));
         }
         connection.close();
     }
