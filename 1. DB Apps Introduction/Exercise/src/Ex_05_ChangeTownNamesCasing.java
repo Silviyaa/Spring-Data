@@ -18,13 +18,13 @@ public class Ex_05_ChangeTownNamesCasing {
         String countryName = scanner.nextLine();
 
         PreparedStatement updateTownName = connection.prepareStatement(
-                "update towns set name = UPPER(name) where id = ?");
+                "update towns set name = UPPER(name) where country = ?");
         updateTownName.setString(1,countryName);
 
 
         int updateCount = updateTownName.executeUpdate();
 
-        if(updateCount!=0){
+        if(updateCount==0){
             System.out.println("No town names were affected.");
             return;
         }
