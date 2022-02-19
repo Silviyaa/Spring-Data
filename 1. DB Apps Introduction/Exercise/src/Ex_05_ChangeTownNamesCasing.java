@@ -20,13 +20,16 @@ public class Ex_05_ChangeTownNamesCasing {
         PreparedStatement updateTownName = connection.prepareStatement(
                 "update towns set name = UPPER(name) where id = ?");
         updateTownName.setString(1,countryName);
+
+
         int updateCount = updateTownName.executeUpdate();
 
         if(updateCount!=0){
-            System.out.print("No town names were affected.");
+            System.out.println("No town names were affected.");
             return;
         }
-        System.out.print(updateCount + " town names were affected. \n");
+        System.out.println(updateCount + " town names were affected.");
+
 
         PreparedStatement selectAllTowns = connection.prepareStatement(
                 "SELECT name FROM towns WHERE country = ?"
@@ -37,7 +40,7 @@ public class Ex_05_ChangeTownNamesCasing {
         List<String> towns = new ArrayList<>();
         while (townsSet.next()){
             String townName = townsSet.getString("name");
-           towns.add(townName);
+            towns.add(townName);
         }
         System.out.print(towns);
     }
