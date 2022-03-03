@@ -15,8 +15,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user) {
-        boolean exists = userRepository.exists(user);
-        if(!exists) {
+       User found = this.userRepository
+               .findByUsername(user.getUsername());
+        if(found == null) {
             this.userRepository.save(user);
         }
     }
