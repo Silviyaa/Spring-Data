@@ -5,6 +5,7 @@ import com.example.spring_data_intro.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Properties;
 
 @Service
@@ -15,9 +16,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user) {
-       User found = this.userRepository
+       Optional<User> found = this.userRepository
                .findByUsername(user.getUsername());
-        if(found == null) {
+        if(found.isEmpty()) {
             this.userRepository.save(user);
         }
     }
